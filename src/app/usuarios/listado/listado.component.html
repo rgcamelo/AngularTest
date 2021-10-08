@@ -1,0 +1,38 @@
+<div class="Container">
+    <div class="row">
+        <h3>Gestion de Usuarios</h3>
+        <button class="btn btn-success" (click)="crear()">
+          Crear
+        </button>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of listaUsuarios; let i = index ">
+                    <th scope="row">{{ usuario.nombre}}</th>
+                    <td>{{ usuario.apellido }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>
+                        <button class="btn btn-outline-primary btn-sm" (click)="ver(usuario)">
+                          <i class="fa fa-eye"></i>
+                        </button>
+                        <button class="btn btn-outline-warning btn-sm" (click)="editar(usuario,i)">
+                          <i class="fa fa-pencil"></i>
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm" (click)="eliminarUsuario(i)">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

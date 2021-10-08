@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        <div *ngFor="let photo of photos" class="col-3">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" load="lazy" src="{{photo.url}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{photo.title}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

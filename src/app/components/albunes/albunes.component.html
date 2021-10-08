@@ -1,0 +1,18 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Fotos</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let album of albums">
+            <th scope="row">{{album.id}}</th>
+            <td>{{album.title}}</td>
+            <td>
+                <a class="btn btn-success" [routerLink]="['/photos',album.id]">Ver</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

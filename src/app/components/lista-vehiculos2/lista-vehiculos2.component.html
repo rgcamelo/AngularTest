@@ -1,0 +1,28 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Marca</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Year</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Color</th>
+            <th scope="col">Impuesto (%)</th>
+            <th scope="col">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let vehiculo of listaVehiculos">
+            <th scope="row">{{vehiculo.marca}}</th>
+            <td>{{vehiculo.modelo}}</td>
+            <td>{{vehiculo.year}}</td>
+            <td>{{vehiculo.precio}}</td>
+            <td>{{vehiculo.color}}</td>
+            <td>
+                <div style="display: flex; flex-direction: column; width: 150px;">
+                    <input type="number" id="impuesto" name="impuesto" [value]="vehiculo.nimpuesto" (change)="evento($event,vehiculo)">
+                </div>
+            </td>
+            <td>{{vehiculo.total}}</td>
+        </tr>
+    </tbody>
+</table>

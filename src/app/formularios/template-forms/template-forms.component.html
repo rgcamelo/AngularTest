@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="row">
+        <h3>Template Forms</h3>
+    </div>
+    <div class="row">
+        <form autocomplete="off" (ngSubmit)="guardar(form)" #form="ngForm">
+            <div class="col-12- form-group">
+                <label class="col-2 col-form-label">Nombre</label>
+                <div class="col-10">
+                    <input type="text" name="nombre" class="form-control" placeholder="Nombre" [(ngModel)]="usuario.name" required minlength="3" #nombre="ngModel" [class.is-invalid]="nombre.invalid && nombre.touched">
+                    <small class="form-text text-danger" *ngIf="nombre.touched && nombre.invalid">
+                      Nombre invalido
+                    </small>
+                </div>
+            </div>
+            <div class="col-12- form-group">
+                <label class="col-2 col-form-label">Apellido</label>
+                <div class="col-10">
+                    <input type="text" name="apellido" class="form-control" placeholder="Apellido" [(ngModel)]="usuario.apellido" required minlength="3" #apellido="ngModel" [class.is-invalid]="apellido.invalid && apellido.touched">
+                    <small class="form-text text-danger" *ngIf="apellido.touched && apellido.invalid">
+                      Apellido invalido
+                    </small>
+                </div>
+            </div>
+            <div class="col-12- form-group">
+                <label class="col-2 col-form-label">Pais</label>
+                <div class="col-10">
+                    <select class="form-control" [disabled]="paises.length <=0" name="pais" required [(ngModel)]="usuario.pais" #pais="ngModel" [class.is-invalid]="pais.invalid && pais.touched">
+                      <option *ngFor="let p of paises" [value]="p.codigo">{{p.nombre}}</option>
+                    </select>
+                    <small class="form-text text-danger" *ngIf="pais.touched && pais.invalid">
+                    Pais invalido
+                  </small>
+                </div>
+            </div>
+            <div class="col-12- form-group">
+                <label class="col-2 col-form-label">Email</label>
+                <div class="col-10">
+                    <input type="email" name="email" class="form-control" placeholder="Email" [(ngModel)]="usuario.email" required pattern="[a-z0-9._%+-]{3,}@[a-z]{3,}([.]{1}[a-z]{2,}|[.]{1}[a-z]{2,}[.]{1}[a-z]{2,})" #email="ngModel" [class.is-invalid]="email.invalid && email.touched">
+                    <small class="form-text text-danger" *ngIf="email.touched && email.invalid">
+                      Email invalido
+                    </small>
+                </div>
+            </div>
+            <div class="col-12- form-group">
+                <label class="col-2 col-form-label">Genero</label>
+                <div class="col-10">
+                    <input type="radio" name="genero" value="M" id="radioM" [(ngModel)]="usuario.genero" required #genero="ngModel">
+                    <label class="form-check-label" for="radioM">Masculino</label>
+                </div>
+            </div>
+            <div class="col-12- form-group">
+                <div class="col-10">
+                    <input type="radio" name="genero" value="F" id="radioF" [(ngModel)]="usuario.genero" required #genero="ngModel">
+                    <label class="form-check-label" for="radioF">Femenino</label>
+                </div>
+                <small class="form-text text-danger" *ngIf="genero.touched && genero.invalid">
+                  Debe seleccionar genero
+                </small>
+            </div>
+            <div class="col-12" style="margin-top: 20px;">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+                <button type="reset" class="btn btn-danger" style="margin-left: 10px;">Limpiar</button>
+            </div>
+        </form>
+    </div>
+    <div>
+        {{ usuario|json}}
+    </div>
+
+</div>

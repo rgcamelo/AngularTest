@@ -1,0 +1,185 @@
+<div class="row">
+    <div class="col">
+        <input name="titulo" type="text" class="form-control" [value]='actividadSeleccionada.titulo' placeholder="Titulo" (change)="cambiar($event,'titulo')">
+    </div>
+    <div class="col">
+        <input name='descripcion' type="text" class="form-control" [value]='actividadSeleccionada.descripcion' placeholder="Descripcion" (change)="cambiar($event,'descripcion')">
+    </div>
+    <div class="col">
+        <button (click)="guardar('pendientes')" class="btn btn-primary">Guardar</button>
+        <button (click)="limpiar()" class="btn btn-danger">Limpiar</button>
+        <!-- //<button (click)="" class="btn btn-warinig">Editar</button> -->
+    </div>
+</div>
+
+<hr>
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            Pendiente
+            <div *ngFor="let actividad of pendientes" class="row" style="width: auto;">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                {{actividad.titulo}}
+                            </div>
+                            <div class="col">
+                                <button (click)="minimizar(actividad)" class="btn btn-primary">Min</button>
+                            </div>
+                            <div class="col">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{actividad.id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-caret-down"></i>
+                              </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{actividad.id}}">
+                                        <a class="dropdown-item" (click)="movimientos('pendientes','enproceso',actividad)">Mover a En Proceso</a>
+                                        <a class="dropdown-item" (click)="movimientos('pendientes','terminadas',actividad)">Mover a Terminadas</a>
+                                        <a class="dropdown-item" (click)="movimientos('pendientes','canceladas',actividad)">Mover a Canceladas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="actividad.min" class="card-body">
+                        <p class="card-text">{{actividad.descripcion}}</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <input type="text" id="buscar" name="buscar" [value]="actividad.estado" (change)="cambiarestado('pendientes',actividad,$event)">
+                            </li>
+                        </ul>
+                        <!-- <button (click)="seleccionar(actividad)" class="btn btn-warning btn-block">Seleccionar</button> -->
+
+                    </div>
+                    <button (click)="editar(actividad)" class="btn btn-warning ">Editar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            En proceso
+
+            <div *ngFor="let actividad of enproceso" class="row" style="width: auto;">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                {{actividad.titulo}}
+                            </div>
+                            <div class="col">
+                                <button (click)="minimizar(actividad)" class="btn btn-primary">Min</button>
+                            </div>
+                            <div class="col">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{actividad.id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <i class="fas fa-caret-down"></i>
+                            </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{actividad.id}}">
+                                        <a class="dropdown-item" (click)="movimientos('enproceso','pendientes',actividad)">Mover a Pendientes</a>
+                                        <a class="dropdown-item" (click)="movimientos('enproceso','terminadas',actividad)">Mover a Terminadas</a>
+                                        <a class="dropdown-item" (click)="movimientos('enproceso','canceladas',actividad)">Mover a Canceladas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="actividad.min" class="card-body">
+                        <p class="card-text">{{actividad.descripcion}}</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <input type="text" id="buscar" name="buscar" [value]="actividad.estado" (change)="cambiarestado('enproceso',actividad,$event)">
+                            </li>
+                        </ul>
+                        <!-- <button (click)="seleccionar(actividad)" class="btn btn-warning">Editar</button> -->
+
+                    </div>
+                    <button (click)="editar(actividad)" class="btn btn-warning">Editar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            Terminadas
+
+            <div *ngFor="let actividad of terminadas" class="row" style="width: auto;">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                {{actividad.titulo}}
+                            </div>
+                            <div class="col">
+                                <button (click)="minimizar(actividad)" class="btn btn-primary">Min</button>
+                            </div>
+                            <div class="col">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{actividad.id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="fas fa-caret-down"></i>
+                        </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{actividad.id}}">
+                                        <a class="dropdown-item" (click)="movimientos('terminadas','pendientes',actividad)">Mover a Pendientes</a>
+                                        <a class="dropdown-item" (click)="movimientos('terminadas','enproceso',actividad)">Mover a En Proceso</a>
+                                        <a class="dropdown-item" (click)="movimientos('terminadas','canceladas',actividad)">Mover a Canceladas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="actividad.min" class="card-body">
+                        <p class="card-text">{{actividad.descripcion}}</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <input type="text" id="buscar" name="buscar" [value]="actividad.estado" (change)="cambiarestado('terminadas',actividad,$event)">
+                            </li>
+                        </ul>
+                        <!-- <button (click)="seleccionar(actividad)" class="btn btn-warning">Editar</button> -->
+
+                    </div>
+                    <button (click)="editar(actividad)" class="btn btn-warning">Editar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            Canceladas
+
+            <div *ngFor="let actividad of canceladas" class="row" style="width: auto;">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                {{actividad.titulo}}
+                            </div>
+                            <div class="col">
+                                <button (click)="minimizar(actividad)" class="btn btn-primary">Min</button>
+                            </div>
+                            <div class="col">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{actividad.id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <i class="fas fa-caret-down"></i>
+                            </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{actividad.id}}">
+                                        <a class="dropdown-item" (click)="movimientos('canceladas','pendientes',actividad)">Mover a Pendientes</a>
+                                        <a class="dropdown-item" (click)="movimientos('canceladas','enproceso',actividad)">Mover a En Proceso</a>
+                                        <a class="dropdown-item" (click)="movimientos('canceladas','terminadas',actividad)">Mover a Terminadas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div *ngIf="actividad.min" class="card-body">
+                        <p class="card-text">{{actividad.descripcion}}</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <input type="text" id="buscar" name="buscar" [value]="actividad.estado" (change)="cambiarestado('canceladas',actividad,$event)">
+                            </li>
+                        </ul>
+                        <!-- <button (click)="seleccionar(actividad)" class="btn btn-warning">Seleccionar</button> -->
+                        <hr>
+
+                    </div>
+                    <button (click)="editar(actividad)" class="btn btn-warning">Editar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

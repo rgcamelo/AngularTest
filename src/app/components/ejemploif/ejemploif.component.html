@@ -1,0 +1,17 @@
+<div id="container">
+    <button class="btn btn-danger" (click)="clickBoton(1)">Rojo</button>
+    <button class="btn btn-primary" (click)="clickBoton(2)">Azul</button>
+    <button class="btn btn-success" (click)="clickBoton(3)">Verde</button>
+    <button class="btn btn-dark" (click)="clickBoton(4)">Negro</button>
+    <button class="btn btn-warning" (click)="clickBoton(5)">Por defecto</button>
+
+    <div [ngSwitch]="seleccion">
+        <div id="div1" *ngSwitchCase="1"></div>
+        <div id="div2" *ngSwitchCase="2"></div>
+        <div id="div3" *ngSwitchCase="3"></div>
+        <div id="div4" *ngSwitchCase="4"></div>
+        <div id="div5" *ngSwitchDefault></div>
+    </div>
+
+
+</div>

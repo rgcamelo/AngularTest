@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+
+        <h3>Reactive Forms</h3>
+    </div>
+    <form autocomplete="off" [formGroup]="form" (ngSubmit)="guardar()">
+        <div class="row form-group">
+            <label for="">Nombre</label>
+            <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
+        </div>
+        <div class="row form-group">
+            <label for="">Apellido</label>
+            <input type="text" class="form-control" placeholder="Apellido" formControlName="apellido">
+        </div>
+        <div class="row form-group">
+            <label for="">Correo</label>
+            <input type="email" class="form-control" placeholder="Correo Electronico" formControlName="email">
+        </div>
+        <div class="row">
+            <div class="form-row col" formGroupName="passwords">
+                <label class="col-form-label">Contraseña</label>
+                <div class="col">
+                    <input type="password" class="form-control" placeholder="Contraseña" formControlName="password" [class.is-invalid]="pass1NoValido">
+                </div>
+                <div class="col">
+                    <input type="password" class="form-control" placeholder="Contraseña2" formControlName="password2" [class.is-invalid]="pass2NoValido && enviado">
+                </div>
+
+            </div>
+            <small class="form-text text-danger" *ngIf="pass1NoValido">
+              Contraseña Debil
+            </small>
+            <small class="form-text text-danger" *ngIf="pass2NoValido && enviado">
+              Contraseña no coniciden
+            </small>
+        </div>
+        <hr>
+        <div class="row form-group">
+            <button class="btn btn-outline-primary">Aceptar</button>
+        </div>
+        <br>
+        <p> {{ form.status | json}}</p>
+        <p> {{ form.value | json}}</p>
+        <p> {{ enviado | json}}</p>
+    </form>
+</div>

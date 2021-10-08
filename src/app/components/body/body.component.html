@@ -1,0 +1,26 @@
+<div class="container">
+    <h3> Lista de elementos</h3>
+    <ul>
+        <li *ngFor="let persona of listaOPersonas">
+            <app-item [personna]="persona"></app-item>
+        </li>
+    </ul>
+
+    <div style="display: flex; flex-direction: column; width: 150px;">
+        <label for="namePersona">Ingrese Nombre</label>
+        <input type="text" id="namePersona" name="namePersona" [value]="nombrePersona" (change)="evento($event,'nombre')">
+        <label for="apellidoPersona">Ingrese Apellido</label>
+        <input type="text" id="apellidoPersona" name="apellidoPersona" [value]="apellidoPersona" (change)="evento($event,'apellido')">
+        <label for="edadPersona">Ingrese Edad</label>
+        <input type="number" id="edadPersona" name="edadPersona" [value]="edadPersona" (change)="evento($event,'edad')">
+        <button (click)="agregarPersona()">Registrar</button>
+
+    </div>
+
+    <ul>
+        <li *ngFor="let persona of listaOPersonas">
+            <p *ngIf="persona.edad >= 18"> {{persona.nombre}} es mayor de 18</p>
+            <p *ngIf="persona.edad < 18"> {{persona.nombre}} es menor de edad</p>
+        </li>
+    </ul>
+</div>

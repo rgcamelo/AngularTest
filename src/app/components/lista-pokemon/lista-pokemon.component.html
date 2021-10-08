@@ -1,0 +1,56 @@
+<div class="container">
+    <div style="display: flex; flex-direction: column; width: 150px;">
+        <input type="text" id="buscar" name="buscar" [value]="buscara" (change)="buscar($event.target.value)">
+    </div>
+    <button (click)="cambiarForma()" *ngIf="forma=='cuadrado'" class="btn btn-primary">Lista</button>
+    <button (click)="cambiarForma()" *ngIf="forma=='lista'" class="btn btn-primary">Cuadrados</button>
+    <div class="row">
+        <div class="col-8">
+            <table *ngIf="forma == 'lista'" class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Url</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pokemon of resultados">
+                        <th scope="row">{{pokemon.name | titlecase}}</th>
+                        <td>{{pokemon.url}}</td>
+                        <td>
+                            <button (click)="consultarPokemon(pokemon.url)" class="btn btn-success">Detalles</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="forma=='cuadrado'" class="row">
+                <div style="margin: 10px;" *ngFor="let pokemon of resultados" class="col-md-6 col-lg-3">
+                    <div class="card" style="width: 10rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{pokemon.name}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{pokemon.url}}</h6>
+                            <button (click)="consultarPokemon(pokemon.url)" class="btn btn-success">Detalles</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button *ngIf="atras" (click)="anterioresPokemon()" class="btn btn-primary">Antes</button>
+            <button *ngIf="siguiente" (click)="siguientesPokemon()" class="btn btn-primary">Siguiente</button>
+        </div>
+        <div class="col-4">
+            <div *ngIf="Pokemon" class="card" style="width: 18rem;">
+                <img class="card-img-top" [src]="Pokemon.img" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{Pokemon.name | titlecase}}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Altura: {{Pokemon.height}}</li>
+                    <li class="list-group-item">Ancho: {{Pokemon.weight}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>

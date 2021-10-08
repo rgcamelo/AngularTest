@@ -1,0 +1,8 @@
+<div *ngIf="activity" class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{activity.title}}</h5>
+        <div style="display: flex; flex-direction: column; width: 150px;">
+            <input type="text" id="completed" name="completed" [value]="activity.completed" (change)="evento($event)">
+        </div>
+    </div>
+</div>
